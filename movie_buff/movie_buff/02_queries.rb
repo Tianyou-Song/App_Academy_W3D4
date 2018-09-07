@@ -22,7 +22,7 @@ def vanity_projects
   # Show the movie id and title and director's name.
 
   # Note: Directors appear in the 'actors' table.
-  Movie.joins('JOIN actors ON actors.id = movies.director_id').joins(:castings).where('castings.ord = 1 AND castings.actor_id = movies.director_id').select(:id, :title, :name)
+  Movie.joins(:actors).joins(:castings).where('castings.ord = 1 AND actors.id = movies.director_id').select(:id, :title, :name).uniq
 end
 
 def most_supportive
